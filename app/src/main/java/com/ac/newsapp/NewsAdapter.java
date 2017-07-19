@@ -38,6 +38,23 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView authorView = (TextView) listItemView.findViewById(R.id.section_id);
         authorView.setText(currentNews.getSection());
 
+        TextView dateView = (TextView) listItemView.findViewById(R.id.date_id);
+        dateView.setText(formatDate(currentNews.getDateAndTimeOfPublish()));
+
+        TextView timeView = (TextView) listItemView.findViewById(R.id.time_id);
+        timeView.setText(formatTime(currentNews.getDateAndTimeOfPublish()));
+
         return listItemView;
+    }
+
+    public String formatDate(String dateAndTime) {
+
+        String parts[] = dateAndTime.split("T");
+        return parts[0];
+    }
+
+    public String formatTime(String dateAndTime) {
+        String parts[] = dateAndTime.split("T");
+        return parts[1];
     }
 }

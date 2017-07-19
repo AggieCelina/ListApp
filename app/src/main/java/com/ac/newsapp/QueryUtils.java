@@ -1,6 +1,12 @@
 package com.ac.newsapp;
 
+import android.app.LoaderManager;
+import android.text.TextUtils;
 import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,12 +27,36 @@ public class QueryUtils {
 
     public static final String LOG_TAG = NewsSeachActivity.class.getName();
 
-    private QueryUtils(){
+    private QueryUtils() {
     }
 
-    public static ArrayList<News> extractNewsFromJson(String newsJSON){
+    public static ArrayList<News> extractNewsFromJson(String newsJSON) {
         ArrayList<News> news = new ArrayList<>();
-        return  news;
+
+        if (TextUtils.isEmpty(newsJSON)) {
+            Log.e(LOG_TAG, "This JSON is empty ***********");
+        }
+        try {
+            JSONObject baseJsonResponse = new JSONObject(newsJSON);
+            JSONObject response = baseJsonResponse.getJSONObject("response");
+            if (response.has("results")) {
+                JSONArray results = response.getJSONArray("results");
+                if (results.length() > 0) {
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject result = results.getJSONObject(i);
+                        String title = result.getString("webTitle");
+                        String section = result.getString("sectionName");
+                        String timeOfPublish = result.getString("webPublicationDate");
+                        String webUrl = result.getString("webUrl");
+
+                        news.add(new News(title, section, timeOfPublish, webUrl));
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Problem parsing JSON results \n\n\n\n ***********", e);
+        }
+        return news;
     }
 
     public static String readFromStream(InputStream inputStream) throws IOException {
@@ -88,12 +118,6 @@ public class QueryUtils {
     }
 
     public static List<News> fetchNewsData(String requestUrl) {
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Create URL object
         URL url = createUrl(requestUrl);

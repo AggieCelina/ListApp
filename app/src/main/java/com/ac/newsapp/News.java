@@ -8,10 +8,10 @@ public class News {
 
     private String title;
     private String section;
-    private long timeOfPublish;
+    private String timeOfPublish;
     private String url;
 
-    public News(String title, String section, long timeOfPublish, String url) {
+    public News(String title, String section, String timeOfPublish, String url) {
         this.title = title;
         this.section = section;
         this.timeOfPublish = timeOfPublish;
@@ -26,7 +26,7 @@ public class News {
         return section;
     }
 
-    public long getTimeOfPublish() {
+    public String getDateAndTimeOfPublish() {
         return timeOfPublish;
     }
 
