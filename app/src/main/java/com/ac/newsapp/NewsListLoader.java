@@ -30,7 +30,6 @@ public class NewsListLoader extends AsyncTaskLoader<List<News>> {
         List<News> result = QueryUtils.fetchNewsData(url);
         Log.i(LOG_TAG, "fetch data");
 
-        // Return the {@link Event} object as the result fo the {@link TsunamiAsyncTask}
         return result;
     }
 

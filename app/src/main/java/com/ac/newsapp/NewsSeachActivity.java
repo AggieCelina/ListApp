@@ -38,7 +38,7 @@ public class NewsSeachActivity extends AppCompatActivity implements android.app.
         emptyStateTextView = (TextView) findViewById(R.id.empty_view);
         newsListView.setEmptyView(emptyStateTextView);
 
-        // Create a new adapter that takes an empty list of earthquakes as input
+        // Create a new adapter that takes an empty list of news as input
         adapter = new NewsAdapter(this, new ArrayList<News>());
 
         // Set the adapter on the {@link ListView}
@@ -46,17 +46,17 @@ public class NewsSeachActivity extends AppCompatActivity implements android.app.
         newsListView.setAdapter(adapter);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected earthquake.
+        // to open a website with more information about the selected news.
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Find the current earthquake that was clicked on
+                // Find the current news that was clicked on
                 News currentNews = adapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
                 Uri newsUri = Uri.parse(currentNews.getUrl());
 
-                // Create a new intent to view the earthquake URI
+                // Create a new intent to view the news URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
 
                 // Send the intent to launch a new activity

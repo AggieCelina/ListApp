@@ -129,10 +129,8 @@ public class QueryUtils {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        // Extract relevant fields from the JSON response and create an {@link Event} object
         List<News> news = extractNewsFromJson(jsonResponse);
 
-        // Return the {@link Event}
         return news;
     }
 }
