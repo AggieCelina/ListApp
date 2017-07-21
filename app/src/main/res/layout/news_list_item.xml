@@ -15,8 +15,7 @@
         <TextView
             android:id="@+id/title_id"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="test test 1 "
@@ -25,12 +24,9 @@
         <TextView
             android:id="@+id/section_id"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="test test 2"
-
             android:textAllCaps="true" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -44,21 +40,16 @@
         <TextView
             android:id="@+id/date_id"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_weight="1"
             android:text="test test 1 " />
 
         <TextView
             android:id="@+id/time_id"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_weight="1"
             android:text="test test 2"
-
             android:textSize="14sp" />
-
     </LinearLayout>
-
 </LinearLayout>
