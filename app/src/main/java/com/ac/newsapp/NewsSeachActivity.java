@@ -118,10 +118,31 @@ public class NewsSeachActivity extends AppCompatActivity implements android.app.
         // Clear the adapter of previous news data
         adapter.clear();
 
-        // If there is a valid list of {@link News}s, then add them to the adapter's
-        // data set. This will trigger the ListView to update.
-        if (news != null && !news.isEmpty()) {
-            adapter.addAll(news);
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Get details on the currently active default data network
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        // If there is a network connection, fetch data
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            // If there is a valid list of {@link News}s, then add them to the adapter's
+            // data set. This will trigger the ListView to update.
+            if (news != null && !news.isEmpty()) {
+                adapter.addAll(news);
+            }
+        } else {
+            // Clear the adapter of previous news data
+            adapter.clear();
+
+            // Otherwise, display error
+            // First, hide loading indicator so error message will be visible
+            loadingIndicator = findViewById(R.id.loading_indicator);
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Update empty state with no connection error message
+            emptyStateTextView.setText(R.string.no_internet_connection);
         }
     }
 

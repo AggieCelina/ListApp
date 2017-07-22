@@ -1,6 +1,5 @@
 package com.ac.newsapp;
 
-import android.app.LoaderManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -35,6 +34,7 @@ public class QueryUtils {
 
         if (TextUtils.isEmpty(newsJSON)) {
             Log.e(LOG_TAG, "This JSON is empty ***********");
+            return null;
         }
         try {
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
